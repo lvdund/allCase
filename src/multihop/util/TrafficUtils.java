@@ -21,8 +21,8 @@ public class TrafficUtils {
 
 	public static Queue<RequestBase> createReqList(List<NodeVehicle> topo) throws IOException {
 		FileWriter traff;
-		// traff = new FileWriter("traffic_module.txt");
-		// traff.write("\n List REQ: \n" + "id\t" + "srcNode\t" + "timeArrival\t" + "workLoad\t" + "\n");
+		traff = new FileWriter("traffic_module.txt");
+		traff.write("\n List REQ: \n" + "id\t" + "srcNode\t" + "timeArrival\t" + "workLoad\t" + "\n");
 
 		Queue<RequestBase> reqPiority = new PriorityQueue<RequestBase>(); // store req by time and id
 
@@ -40,22 +40,26 @@ public class TrafficUtils {
 		for (int n = 0; n < fixedNode.length; n++) {
 			int idNode = fixedNode[n];
 			double reqTime = 0;
-			for (int i = 1; i <= Constants.NUM_REQ[0]; i++) {
+			for (int i = 1; i <= Constants.NUM_REQ[1]; i++) {
 				int wl = data[DATA];
-
 				Random generator = new Random();
-				int ia = generator.nextInt(3); // get WL
+				int ia = assignWL(1, idReq, 3); // get WL
 				wl = data[ia];
 
 				// if (idNode == 6) {wl = data[3];} else {wl = data[3];}
 				reqPiority.add(new RequestBase(idReq, wl, topo.get(idNode), reqTime, false));
-				// traff.write(idReq + "\t" + idNode + "\t" + reqTime + "\t" + wl + "\n");
+				traff.write(idReq + "\t" + idNode + "\t" + reqTime + "\t" + wl + "\n");
 				reqTime += 1; // == timeArrival
 				idReq++;
 			}
 		}
-		// traff.close();
+		traff.close();
 		return reqPiority;
+	}
+
+	public static int assignWL(int a, int b, int numberOfWL) {
+		int c = (a + b) % numberOfWL;
+		return c;
 	}
 
 	// public static Queue<RequestBase> createReqList_Possion(List<NodeVehicle>

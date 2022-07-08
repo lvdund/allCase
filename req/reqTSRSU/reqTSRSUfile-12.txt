@@ -1,3 +1,0 @@
-ts = 12.0
-req12 (p(ratio)=0.0	srcNodeRSU: R2	srcNodeVehicle: V6)
-----

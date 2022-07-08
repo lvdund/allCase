@@ -60,8 +60,6 @@ public class MainSim {
 		topo = (List<NodeVehicle>) TopoUtils.createTopo(_m, _n, 10, Constants.TYPE.VEHICLE.ordinal());
 		TopoUtils.updateTimeTopo(topo); // adding moving by time for Vehicle
 
-		// my
-
 		// RSU node
 		_m = 3;
 		_n = 3;
@@ -440,7 +438,6 @@ public class MainSim {
 														+ DecimalFormat1(1) + ",\n");
 									}
 								}
-
 							}
 						}
 					}
@@ -608,11 +605,8 @@ public class MainSim {
 												+ "," + DecimalFormat1(dv.getMovedData()));
 									}
 								}
-
 							}
-							// System.out.println("REQ: " + r.getId() + "\n" + "->" + n.getName() + "_" +
-							// d.getRoute() + ": " + d.getStart() + "\t" + d.getEnd());
-
+							// System.out.println("REQ: " + r.getId() + "\n" + "->" + n.getName() + "_" + d.getRoute() + ": " + d.getStart() + "\t" + d.getEnd());
 						}
 
 						for (NodeRSU n : topoRSU) {
