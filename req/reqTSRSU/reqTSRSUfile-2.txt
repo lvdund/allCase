@@ -1,0 +1,7 @@
+ts = 2.0
+req2 (p(ratio)=0.0	srcNodeRSU: R1	srcNodeVehicle: V6)
+----
+req42 (p(ratio)=0.0	srcNodeRSU: R2	srcNodeVehicle: V8)
+----
+req22 (p(ratio)=0.0	srcNodeRSU: R2	srcNodeVehicle: V9)
+----

@@ -1,0 +1,35 @@
+
+ReqID,TimeInit,a(SrcNode),i(DesNode),k(Path), Work load,p(Ratio),
+1,0.0,V2,V2,V2,24.0,1.0,
+2,0.0,V4,V4,V4,60.0,1.0,
+3,0.0,V0,V0,V0,24.0,1.0,
+Vehicle Only no cap
+
+ReqID,timeInit,a(SrcNode),i(DesNode),k(Path),Work load,p(Ratio),Assign Work load,dtTrans,tArrival,t_wait,start,t_proc,end,t_serv(PSO),t_serv(each Vehicle),t_serv(all),moved_data
+1,0.0,V2,V1,V2,24.0,0.29,7.0,0.03,0.03,0.0,0.03,0.26,0.29,0.39,0.29,0.29,0.0
+1,0.0,V2,V2,V2,24.0,0.33,8.0,0.0,0.0,0.0,0.0,0.26,0.26,0.26,0.26,0.29,0.0
+1,0.0,V2,V3,V2,24.0,0.25,6.0,0.02,0.02,0.0,0.02,0.22,0.25,0.39,0.25,0.29,0.0
+1,0.0,V2,V7,V2,24.0,0.13,3.0,0.01,0.01,0.0,0.01,0.11,0.12,0.11,0.12,0.29,0.0
+2,0.0,V4,V3,V4,60.0,0.08,5.0,0.02,0.02,0.23,0.25,0.17,0.41,0.38,0.41,1.07,0.0
+2,0.0,V4,V4,V4,60.0,0.48,29.0,0.0,0.0,0.0,0.0,0.96,0.96,0.96,0.96,1.07,0.0
+2,0.0,V4,V9,V4,60.0,0.43,26.0,0.1,0.1,0.0,0.1,0.96,1.07,0.96,1.07,1.07,0.0
+3,0.0,V0,V0,V0,24.0,0.46,11.0,0.0,0.0,0.0,0.0,0.36,0.36,0.36,0.36,0.42,0.0
+3,0.0,V0,V1,V0,24.0,0.17,4.0,0.02,0.02,0.27,0.29,0.13,0.42,0.38,0.42,0.42,0.0
+3,0.0,V0,V5,V0,24.0,0.38,9.0,0.04,0.04,0.0,0.04,0.33,0.37,0.33,0.37,0.42,0.0
+
+ReqID,TimeInit,a(SrcNode),i(DesNode),k(Path), Work load,t_serv,
+1,0.0,V2,V2,V2,24.0,0.29,
+2,0.0,V4,V4,V4,60.0,1.07,
+3,0.0,V0,V0,V0,24.0,0.42,
+
+ RSU Only no cap 
+ReqID,TimeInit,a(SrcNode),i(DesNode),k(Path),Work load,t_serv(vehicle),moved_data_toRSU,Vehicle->RSU,a(SrcNode),i(DesNode),k(Path),p(Ratio),t_trans_v2r,dtTrans(R2R),t_Arrival(RSU),t_wait(RSU),t_start(RSU),t_proc(RSU),t_end(RSU),t_Ser(PSO),t_serv(RSUlayer),t_service(RSU),moved_data_to_Cloud,Tserv(all),
+1,0.0,V2,V2,V2,24.0,0.0,24.0,Vehicle->RSU,R1,R4,R1,1.0,0.03,0.01,0.03,0.0,0.03,0.08,0.11,0.12,0.12,0.11,0.0,0.11,
+2,0.0,V4,V4,V4,60.0,0.0,60.0,Vehicle->RSU,R2,R5,R2,1.0,0.12,0.02,0.12,0.0,0.12,0.2,0.31,0.34,0.34,0.31,0.0,0.31,
+3,0.0,V0,V0,V0,24.0,0.0,24.0,Vehicle->RSU,R0,R3,R0,1.0,0.04,0.01,0.04,0.0,0.04,0.08,0.12,0.13,0.13,0.12,0.0,0.12,
+
+ RSU and Vehicle
+ReqID,TimeInit,a(SrcNode),i(DesNode),k(Path),Work load,t_serv(vehicle),moved_data_toRSU,Vehicle->RSU,a(SrcNode),i(DesNode),k(Path),p(Ratio),t_trans_v2r,dtTrans(R2R),t_Arrival(RSU),t_wait(RSU),t_start(RSU),t_proc(RSU),t_end(RSU),t_Ser(PSO),t_serv(RSUlayer),t_service(RSU),moved_data_to_Cloud,Tserv(all),
+1,0.0,V2,V2,V2,24.0,0.37,0.0,Vehicle->RSU,R1,R1,R1,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.37,
+2,0.0,V4,V4,V4,60.0,1.03,0.0,Vehicle->RSU,R2,R2,R2,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.03,
+3,0.0,V0,V0,V0,24.0,0.41,0.0,Vehicle->RSU,R0,R0,R0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.41,
