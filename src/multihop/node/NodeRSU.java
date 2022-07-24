@@ -30,7 +30,7 @@ public class NodeRSU extends NodeBase {
 		double ax = a.getX()[i];
 		double ay = a.getY()[i];
 		double k = (this.lat - ax) * (this.lat - ax) + (this.lng - ay) * (this.lng - ay);
-		if (k <= 400) {
+		if (k <= 40000) {
 			return true;
 		}
 		return false;
@@ -39,7 +39,7 @@ public class NodeRSU extends NodeBase {
 	public Boolean checkLK(NodeRSU a) {
 		double k = (this.lat - a.getLat()) * (this.lat - a.getLat())
 				+ (this.lng - a.getLng()) * (this.lng - a.getLng());
-		if (k <= 400) {
+		if (k <= 40000) {
 			return true;
 		}
 		return false;

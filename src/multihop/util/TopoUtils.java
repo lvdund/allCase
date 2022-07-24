@@ -35,9 +35,18 @@ public class TopoUtils {
 			for (int j = 0; j < n; j++) { // x
 				switch (type) {
 					case 0:
-						node = new NodeVehicle(id, "V" + String.valueOf(id), j * space, i * space,
-								Constants.RANGE[type],
-								(Constants.RES[type]));
+						int p = (j * space / 250);
+						int q = (i * space) / 250;
+						if ((i + j) % 2 == 1) {
+							node = new NodeVehicle(id, "V" + String.valueOf(id), p * 250, space * i,
+									Constants.RANGE[type],
+									(Constants.RES[type]));
+						} else {
+							node = new NodeVehicle(id, "V" + String.valueOf(id), space * j, q * 250,
+									Constants.RANGE[type],
+									(Constants.RES[type]));
+						}
+
 						break;
 					case 1:
 						node = new NodeRSU(id, "R" + String.valueOf(id), j * space, i * space, Constants.RANGE[type],
@@ -77,7 +86,6 @@ public class TopoUtils {
 			x[0] = n.getLat();
 			y[0] = n.getLng();
 			int id = generator.nextInt(3);
-			id = 3;
 
 			// id = 3; // move with v = 0 ; fix
 
@@ -101,25 +109,25 @@ public class TopoUtils {
 						if ((phi[i - 1] == 0) || (phi[i - 1] == pi)) {
 							int a = (int) x[i - 1];
 							int b = (int) x[i];
-							if ((a / 10) != (b / 10)) {
+							if ((a / 250) != (b / 250)) {
 								phi[i] = phi[i - 1] + c_phi[change + 1];
 								sign[i] = 0;
-								if (a % 10 == 0)
+								if (a % 250 == 0)
 									x[i] = a;
 								else
-									x[i] = (a / 10 + 1) * 10;
+									x[i] = (a / 250 + 1) * 250;
 								y[i] = y[i - 1] + x[i] - a;
 							}
 						} else {
 							int a = (int) y[i - 1];
 							int b = (int) y[i];
-							if ((a / 10) != (b / 10)) {
+							if ((a / 250) != (b / 250)) {
 								phi[i] = phi[i - 1] + c_phi[change] + 1;
 								sign[i] = 0;
-								if (a % 10 == 0)
+								if (a % 250 == 0)
 									y[i] = a;
 								else
-									y[i] = (a / 10 + 1) * 10;
+									y[i] = (a / 250 + 1) * 250;
 								x[i] = x[i - 1] + y[i] - a;
 							}
 						}
@@ -128,7 +136,7 @@ public class TopoUtils {
 				v[i] = v[i - 1];
 				n.setVelo(v);
 
-				if (x[i] < 0 || x[i] >= 50 || y[i] < 0 || y[i] >= 50) {
+				if (x[i] < -50 || x[i] >= 950 || y[i] < -50 || y[i] >= 950) {
 					x[i] = x[0];
 					y[i] = y[0];
 				}
@@ -210,7 +218,7 @@ public class TopoUtils {
 		rtable.add(0, new RTable(0, root, root.getName(), 0, root.getRes(), req)); // route == src
 
 		int id = 1;
-
+		
 		for (NodeVehicle n1 : root.getNodeNeighbor().get(i)) { // node neighbor tại thời điểm i
 			if (root.getNodeNeighbor().get(i + 1).contains(n1)) { // n1 is still neigbours in next ts --> set lvl = 1
 				n1.setLvl(1);
@@ -222,6 +230,7 @@ public class TopoUtils {
 				}
 			}
 		}
+
 
 		// Caclc with >=2 hops
 		for (int maxHop = 2; maxHop <= MAX; maxHop++) {

@@ -53,7 +53,8 @@ public class NodeVehicle extends NodeBase {
 		double bx = b.getLat();
 		double by = b.getLng();
 		double k = (bx - ax) * (bx - ax) + (by - ay) * (by - ay);
-		if (k <= RANGE) {
+		// if (k <= RANGE) {
+		if (k <= 40000) {
 			return true;
 		}
 		return false;

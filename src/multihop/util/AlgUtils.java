@@ -22,7 +22,7 @@ public class AlgUtils {
 
 		PSOSwarm swarm = new PSOSwarm(particles, epchos, dim, rtable, mapRTable, testCase);
 
-		System.out.println("Running PSO in ts = " + ts);
+		// System.out.println("Running PSO in ts = " + ts);
 		Map<Integer, Double> ratio = swarm.run("service-id-string");
 
 		result = (HashMap<Integer, Double>) ratio;
@@ -40,11 +40,11 @@ public class AlgUtils {
 
 		if (dim > 0) {
 			PSOSwarmRSU swarm = new PSOSwarmRSU(particles, epchos, dim, rtable, mapRTable, testCase);
-			System.out.println("Running PSO in RSU ts = " + ts);
+			// System.out.println("Running PSO in RSU ts = " + ts);
 			Map<Integer, Double> ratio = swarm.run("service-id-string");
 			result = (HashMap<Integer, Double>) ratio;
 		} else {
-			System.out.println("NO REQ FROM VEHICLE -> RSU");
+			// System.out.println("NO REQ FROM VEHICLE -> RSU");
 		}
 
 		return result;

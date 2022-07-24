@@ -18,7 +18,7 @@ public class RequestRSU extends RequestVehicle {
 		// dWL = rv.getMovedData();
 		super(rv.getId(), rv.getMovedData(), rv.getSrcNode(), rv.getTimeInit(), rv.isDone(), rv.getDes(), rv.getRoute(),
 				rv.getStart(), rv.getEnd());
-		// this.wlRSU = rv.getMovedData();
+		this.wlRSU = rv.getMovedData();
 	}
 
 	public String toString() {
@@ -62,14 +62,14 @@ public class RequestRSU extends RequestVehicle {
 		this.movedData = movedData;
 	}
 
-	@Override
-	public int compareTo(RequestBase o) {
-		if (this.start >= ((RequestRSU) o).start) {
-			return 1;
-		} else if (this.start < ((RequestRSU) o).start) {
-			return -1;
-		} else {
-			return 0;
-		}
-	}
+	// @Override
+	// public int compareTo(RequestBase o) {
+	// 	if (this.start >= ((RequestRSU) o).start) {
+	// 		return 1;
+	// 	} else if (this.start < ((RequestRSU) o).start) {
+	// 		return -1;
+	// 	} else {
+	// 		return 0;
+	// 	}
+	// }
 }

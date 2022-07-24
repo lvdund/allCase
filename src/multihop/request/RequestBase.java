@@ -34,6 +34,14 @@ public class RequestBase implements Comparable<RequestBase> {
 		this.id = id;
 	}
 
+	// public double getDuraton() {
+	// return Duration;
+	// }
+
+	// public void setDuration(double Duration) {
+	// this.Duration = Duration;
+	// }
+
 	public double getWL() {
 		return WL;
 	}
@@ -57,7 +65,7 @@ public class RequestBase implements Comparable<RequestBase> {
 	public void setTimeInit(double timeInit) {
 		this.timeInit = timeInit;
 	}
-	
+
 	@Override
 	public int compareTo(RequestBase o) {
 
@@ -65,8 +73,7 @@ public class RequestBase implements Comparable<RequestBase> {
 			return 1;
 		} else if (this.timeInit < o.timeInit) {
 			return -1;
-		} 
-		else {
+		} else {
 			if (this.id > o.id) {
 				return 1;
 			} else if (this.id < o.id) {
@@ -75,11 +82,12 @@ public class RequestBase implements Comparable<RequestBase> {
 				return 0;
 			}
 		}
+		
 	}
 
 	@Override
 	public String toString() {
-		String ss = this.getId()+"\t"+this.getSrcNode()+"\t"+this.getTimeInit()+"\t"+this.getWL();
+		String ss = this.getId() + "\t" + this.getSrcNode() + "\t" + this.getTimeInit() + "\t" + this.getWL();
 		return ss;
 	}
 

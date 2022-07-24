@@ -16,6 +16,7 @@ import multihop.RTable;
  */
 public class PSOSwarmRSU {
 
+
 	private int numOfParticles, epochs;
 	private double inertia_max, inertia_min, cognitiveComponent, socialComponent;
 	private int dim;
@@ -27,7 +28,7 @@ public class PSOSwarmRSU {
 	public static final double DEFAULT_COGNITIVE = 1.05; // Cognitive component.
 	public static final double DEFAULT_SOCIAL = 1.05; // Social component. // 1.05
 
-	public static final double INFINITY = Double.POSITIVE_INFINITY;
+	public static final double INFINITY = 999999; // Double.POSITIVE_INFINITY;
 	private int testCase;
 
 	private List<RTable> rtable = new ArrayList<RTable>();
@@ -44,9 +45,9 @@ public class PSOSwarmRSU {
 	 * @param mapRTable
 	 * @param testCase
 	 */
-	public PSOSwarmRSU(int particles, int epochs, int dim, List<RTable> rtable,
+	public PSOSwarmRSU(int particles, int epochs,int dim, List<RTable> rtable,
 			HashMap<Integer, List<RTable>> mapRTable, int testCase) {
-		this(particles, epochs, dim, INERTIA_MAX, INERTIA_MIN, DEFAULT_COGNITIVE, DEFAULT_SOCIAL,
+		this(particles, epochs,dim, INERTIA_MAX, INERTIA_MIN, DEFAULT_COGNITIVE, DEFAULT_SOCIAL,
 				rtable, mapRTable, testCase);
 	}
 
@@ -61,8 +62,8 @@ public class PSOSwarmRSU {
 	 * @param testCase
 	 * @param mapRTable2
 	 */
-	public PSOSwarmRSU(int particles, int epochs, int dim, double inertia_max, double inertia_min, double cognitive,
-			double social, List<RTable> rtable,
+	public PSOSwarmRSU(int particles, int epochs,int dim, double inertia_max, double inertia_min, double cognitive,
+			double social,List<RTable> rtable,
 			HashMap<Integer, List<RTable>> mapRTable, int testCase) {
 
 		this.numOfParticles = particles;
@@ -85,6 +86,8 @@ public class PSOSwarmRSU {
 		model = new PSOFunction(dim, testCase); // model
 	}
 
+
+
 	/**
 	 * Execute the algorithm.
 	 */
@@ -94,24 +97,25 @@ public class PSOSwarmRSU {
 		for (PSOParticleRSU p : particles) {
 			okParticles.add(p);
 		}
-
+		
+		
 		LogPSO log = LogPSO.getInstance();
 		double oldEval = bestEval;
 		// System.out.println("--------------------------EXECUTING-------------------------");
 		// System.out.println("Global Best Evaluation (Epoch " + 0 + "):\t" + bestEval);
 		// log.log("init: " + bestEval + "\n");
 		// System.out.println("---------------------------------------------------------------");
-
+		
 		List<PSOParticleRSU> updateParticles = new ArrayList<PSOParticleRSU>();
 
-		PSOParticleRSU bestParticle = new PSOParticleRSU(PSOSim.PSOParticleRSU.FunctionType.A, "bestParticle", dim,
-				mapRTable,
+		PSOParticleRSU bestParticle = new PSOParticleRSU(PSOSim.PSOParticleRSU.FunctionType.A, "bestParticle", dim, mapRTable,
 				rtable);
 		bestParticle.setPosition(bestPosition);
 		Map<Integer, Double> map = mappingRatio(bestParticle);
-
+		
+		
 		for (int i = 0; i < epochs; i++) {
-
+			
 			// log.log(i + "\n");
 			// update inertia
 			double inertia = inertia_max - (((inertia_max - inertia_min) * (i + 1)) / epochs);
@@ -122,45 +126,44 @@ public class PSOSwarmRSU {
 				// bestEval);
 				oldEval = bestEval;
 			}
-
-			// okParticles = updateParticles;
-
-			// System.out.println("echo: " + i + " listPartice: " + updateParticles.size());
-
+			
+			
+			//okParticles = updateParticles;
+			
+		//	System.out.println("echo: " + i + " listPartice: " + updateParticles.size());
+			
 			for (PSOParticleRSU p : updateParticles) {
 				okParticles.remove(p);
 			}
-
-			// System.out.println("echo: " + i + " listPartice: " + okParticles.size());
-
-			if (okParticles.size() == 0) {
-				if (i <= 1) {
+			
+		//	System.out.println("echo: " + i + " listPartice: " + okParticles.size());
+			
+			if(okParticles.size()==0) {
+				if (i<=1) {
 					System.out.println("ALL PARTICLE FALL");
 				}
-
+				
 				return map;
 			}
-
+			
 			for (PSOParticleRSU p : okParticles) {
 
 				double eval = eval(p);
 				// log.log("t_ser: " + eval +"\n");
-				if (eval == INFINITY) {
-					updateParticles.add(p);
-				}
-
-				if (p.updatePersonalBest(eval)) {
+				 if (eval==INFINITY) {
+					 updateParticles.add(p);
+					 }
+				
+				if(p.updatePersonalBest(eval)) {
 					// System.out.println("PBEST: " + "echo: " + i + " " + p.getName());
 				}
 
 				if (updateGlobalBest(p)) {
-					// System.out.println("GBEST: " + "echo: " + i + " " + p.getName() + "\n" +
-					// p.getBestPosition().toStringOutput());
+				//	System.out.println("GBEST: " + "echo: " + i + " " + p.getName() + "\n" + p.getBestPosition().toStringOutput());
 				}
 			}
 
-			// System.out.println("echo: " + i + " best: " +
-			// bestPosition.getVectorRatio().toStringOutput());
+//			System.out.println("echo: " + i + " best: " + bestPosition.getVectorRatio().toStringOutput());
 
 			for (PSOParticleRSU p : particles) {
 				updateVelocity(p, inertia);
@@ -169,9 +172,8 @@ public class PSOSwarmRSU {
 
 		}
 
-		// bestParticle = new PSOParticle(PSOSim.PSOParticle.FunctionType.A,
-		// "bestParticle", nodes, mapRTable,
-		// rtable);
+		//bestParticle = new PSOParticle(PSOSim.PSOParticle.FunctionType.A, "bestParticle", nodes, mapRTable,
+//				rtable);
 		bestParticle.setPosition(bestPosition);
 		map = mappingRatio(bestParticle);
 		// System.out.println("---------------------------COMPLETE-------------------------");
@@ -189,28 +191,29 @@ public class PSOSwarmRSU {
 
 		PSOParticleRSU[] particles = new PSOParticleRSU[numOfParticles];
 		for (int i = 0; i < numOfParticles; i++) {
-			// System.out.println("---------------------init");
+		//	System.out.println("---------------------init");
 
-			PSOParticleRSU particle = new PSOParticleRSU(PSOParticleRSU.FunctionType.A, "p" + i, dim, mapRTable,
-					rtable);
-			// System.out.println("particle: " + particle.getPosition().toStringOutput());
+			PSOParticleRSU particle = new PSOParticleRSU(PSOParticleRSU.FunctionType.A, "p" + i, dim, mapRTable, rtable);
+		//	System.out.println("particle: " + particle.getPosition().toStringOutput());
 			// double initialEval = model.multiFunction(particle, workLoad,
 			// currentWorkload,bestNode,rtable).getSum();
 			PSOVector initTime = model.multiFunctionRSU(particle, rtable, mapRTable);
 			double initialEval = initTime.getBiggestResult();
+			
+			
+			
+			if(particle.updatePersonalBest(initialEval)) {
 
-			if (particle.updatePersonalBest(initialEval)) {
 
 			}
 
 			// Checked sum = 100
 			particles[i] = particle;
 			// System.out.println("particle: " + particle.getPosition().toStringOutput());
-			// updateGlobalBest(particle);
+			//updateGlobalBest(particle);
 
 			if (updateGlobalBest(particle)) {
-				// System.out.println("GBEST: " + "e" + 0 + " " + particle.getName() + " is " +
-				// particle.getPosition().getVectorRatio().toStringOutput() + "\n" + bestEval);
+	//			System.out.println("GBEST: " + "e" + 0 + " " + particle.getName() + " is " + particle.getPosition().getVectorRatio().toStringOutput() + "\n" + bestEval);
 			}
 
 		}
@@ -219,11 +222,10 @@ public class PSOSwarmRSU {
 
 	private double eval(PSOParticleRSU p) {
 		double eval = model.multiFunctionRSU(p, rtable, mapRTable).getBiggestResult(); // tmax
-		// if (PSOFunction.constraintF1(p, mapRTable)) {
-		// eval = INFINITY;
-		// System.out.println("Contrains 1");
-		// }
-
+		if (PSOFunction.constraintF1(p, mapRTable)) {
+			eval = INFINITY;
+			// System.out.println("Contrains 1 RSU");
+		}
 		return eval;
 	}
 

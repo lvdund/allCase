@@ -9,6 +9,7 @@ import multihop.RTable;
 
 public class PSOUtils {
 	
+	
 	public static HashMap<String, Integer> getPahts(List<RTable> rtable) {
 
 		HashMap<String, Integer> paths = new HashMap<String, Integer>(); // paths of each node
@@ -17,28 +18,23 @@ public class PSOUtils {
 		for (RTable r : rtable) {
 			int path = 1;
 			String nodeID = r.getDes();
-			if (!check.contains(nodeID)) {		// nếu không chứa node thì thêm
+			if (!check.contains(nodeID)) {
 				for (RTable r2 : rtable) {
-					if ((r2.getDes().equals(r.getDes())) && (r2.getId() != r.getId() 
-						|| (r2.getReq().getId() != r.getReq().getId()))) {
+					if ((r2.getDes().equals(r.getDes()))
+							&& (r2.getId() != r.getId() || (r2.getReq().getId() != r.getReq().getId()))) {
 						path++;
-					}	// nếu r2 === r
+					}
 				}
 				paths.put(nodeID, path);
 				check.add(nodeID);
 			}
-		}
-		
-		// System.out.print("print check: ");
-		// System.out.println(check);
-		// System.out.print("print paths: ");
-		// System.out.println(paths);
 
+		}
 		return paths;
 	}
 
 //
-	public static double[] getRandP(int len) {	// sum of randP = 1
+	public static double[] getRandP(int len) {
 		double sum = 0;
 		double[] randP = new double[len];
 		for (int i = 0; i < len; i++) {

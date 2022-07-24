@@ -1,5 +1,9 @@
 package multihop;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+
 public class Constants {
 	/** INPUT TEST **/
 	// fixed RES all node
@@ -10,14 +14,14 @@ public class Constants {
 		VEHICLE, RSU, SERVER;
 	}
 
-	public final static int MAXINT = Integer.MAX_VALUE;
-	public final static double MAXDOUBLE = Double.MAX_VALUE;
+	public final static int MAXINT = 999999; // Integer.MAX_VALUE
+	public final static double MAXDOUBLE = 999999; // Double.MAX_VALUE
 
-	public final static double[] threshold = { 0.5, 0.7};	// threshold: T_wait(highPri) < threshold  => highPri
+	public final static double[] threshold = { 0.5, 0.7 }; // threshold: T_wait(highPri) < threshold => highPri
 															// T_proc(lowPri) > threshold
 
 	// communication range for Vehicle, Rsu and Server
-	public final static int[] RANGE = { 14 * 14, 20 * 20, 50 * 50 };
+	public final static int[] RANGE = { 140 * 140, 200 * 200, 500 * 500 };
 
 	// public final static double BW = 1/0.00004;
 	public final static double BW = 1 / 0.004;
@@ -31,12 +35,16 @@ public class Constants {
 
 	// pso prames
 	public final static int particles = 50;
-	public final static int epchos = 1000;
+	public final static int epchos = 200;
+	public final static int NumberofVehicle = 400;
 
 	// REQ prams
-	public final static int[] NUM_REQ = {1, 3, 5, 10}; // rate *100
-	public final static int TSIM = 20; // simulation time = 1.5*num req +15
+	public final static int[] NUM_REQ = { 1, 3, 5, 10 }; // rate *100
+	public final static int TSIM = 100; // simulation time = 1.5*num req +15
+	public final static int TREQ = 18;
 	public final static int TS = 1; // 1ts = 1s
+	// public final static int[] highPriNode = {1, 2, 50, 75, 100, 150, 200, 250, 300, 350};
+	public final static List<Integer> highPriNode = Arrays.asList(1, 2, 50, 75, 100, 150, 200, 250, 300, 350);
 
 	public final static int MAXHOP = 1;
 
