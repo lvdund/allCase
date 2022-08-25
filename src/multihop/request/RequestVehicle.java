@@ -145,6 +145,12 @@ public class RequestVehicle extends RequestBase {
 	// @Override
 	public int compareTo(RequestBase o) {
 
+		if( 0.3 >= ((RequestVehicle)o).timeTrans && ((RequestVehicle)o).getSrcNode().getPri() == true ){
+			return 1;
+		}
+		if( 0.7 <= ((RequestVehicle)o).timeProcess && ((RequestBase)o).getSrcNode().getPri() == false ){
+			return -1;
+		}
 		return 0;
 
 	}
